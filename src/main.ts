@@ -22,28 +22,26 @@ export class MarshallsManager {
   }
 
   async processPackage(pkg: string): Promise<object> {
-    // Organize package version map
     const pkgNameStruct: PackageVersionMap = this.createPackageVersionMap(pkg)
 
     return {
       [pkg]: {
         name: pkgNameStruct.packageName,
-        version: pkgNameStruct.packageVersion,
+        version: pkgNameStruct.packageVersion
       }
     }
   }
   createPackageVersionMap(pkg: string): PackageVersionMap {
-    
-      const versionSymbolPosition = pkg.lastIndexOf('@')
-      const versionPosition =
-        versionSymbolPosition === -1 || versionSymbolPosition === 0
-          ? pkg.length
-          : versionSymbolPosition
+    const versionSymbolPosition = pkg.lastIndexOf('@')
+    const versionPosition =
+      versionSymbolPosition === -1 || versionSymbolPosition === 0
+        ? pkg.length
+        : versionSymbolPosition
 
-      return {
-        packageName: pkg.substring(0, versionPosition),
-        packageVersion: pkg.substring(versionPosition + 1) || 'latest',
-        packageString: pkg
-      }
+    return {
+      packageName: pkg.substring(0, versionPosition),
+      packageVersion: pkg.substring(versionPosition + 1) || 'latest',
+      packageString: pkg
+    }
   }
 }
