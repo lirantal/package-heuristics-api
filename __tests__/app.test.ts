@@ -1,17 +1,32 @@
 import { test, describe, beforeEach, mock } from 'node:test'
 import assert from 'node:assert'
-import { add } from '../src/main.ts'
+import { MarshallsManager } from '../src/main.ts'
 
-describe('CLI program', () => {
+describe('MarshallsManager', () => {
 
   beforeEach(() => {
     // Reset the mocks before each test
     mock.reset()
   });
 
-  test('Program sums two arguments', async (t) => {
-    const result = await add(1, 1);
-    assert.strictEqual(result, 2);
-  })
-
+  test('Packages are processed successfully', async (t) => {
+    const pkgs = ['package1', 'package2']
+    const marshallManager = new MarshallsManager(pkgs)
+    const results = await marshallManager.process()
+    assert.deepStrictEqual(results, [
+      {
+        package1: {
+          name: 'package1',
+          version: '1.0.0'
+        }
+      },
+      {
+        package2: {
+          name: 'package2',
+          version: '1.0.0'
+        }
+      }
+    ])
+  });
+  
 });
