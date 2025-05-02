@@ -26,7 +26,7 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "npm@10.8.2",
+  "packageManager": "npm@11.3.0",
   "files": [
     "dist",
     "src",
@@ -34,8 +34,8 @@
   ],
   "scripts": {
     "build": "tsc && tsup",
-    "lint": "eslint . && npm run lint:lockfile",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint && npm run lint:lockfile",
+    "lint:fix": "eslint --fix",
     "lint:lockfile": "lockfile-lint --path package-lock.json --validate-https --allowed-hosts npm yarn",
     "test": "c8 node --loader ts-node/esm --test __tests__/**",
     "test:watch": "c8 node --loader ts-node/esm --test --watch __tests__/**",
@@ -68,19 +68,19 @@
     "url": "https://github.com/lirantal/package-heuristics-api.git"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.7",
-    "@types/node": "^20.14.10",
-    "c8": "^10.1.2",
-    "eslint": "^9.6.0",
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.2",
+    "@types/node": "^22.15.3",
+    "c8": "^10.1.3",
+    "eslint": "^9.25.1",
     "eslint-plugin-security": "^3.0.1",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "lockfile-lint": "^4.14.0",
-    "neostandard": "^0.11.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "lockfile-lint": "^4.14.1",
+    "neostandard": "^0.12.1",
     "ts-node": "^10.9.2",
-    "tsup": "^8.1.0",
-    "typescript": "^5.5.3",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3",
     "validate-conventional-commit": "^1.0.4"
   },
   "lint-staged": {
