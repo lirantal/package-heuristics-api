@@ -1,3 +1,5 @@
+import { PackageVersionMap } from './types.ts'
+
 export async function add(arg1: number, arg2: number): Promise<number> {
   return Promise.resolve(arg1 + arg2)
 }
@@ -20,12 +22,28 @@ export class MarshallsManager {
   }
 
   async processPackage(pkg: string): Promise<object> {
-    // Implementation here
+    // Organize package version map
+    const pkgNameStruct: PackageVersionMap = this.createPackageVersionMap(pkg)
+
     return {
       [pkg]: {
-        name: pkg,
-        version: '1.0.0'
+        name: pkgNameStruct.packageName,
+        version: pkgNameStruct.packageVersion,
       }
     }
+  }
+  createPackageVersionMap(pkg: string): PackageVersionMap {
+    
+      const versionSymbolPosition = pkg.lastIndexOf('@')
+      const versionPosition =
+        versionSymbolPosition === -1 || versionSymbolPosition === 0
+          ? pkg.length
+          : versionSymbolPosition
+
+      return {
+        packageName: pkg.substring(0, versionPosition),
+        packageVersion: pkg.substring(versionPosition + 1) || 'latest',
+        packageString: pkg
+      }
   }
 }
