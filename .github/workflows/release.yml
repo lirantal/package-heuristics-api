@@ -7,6 +7,9 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: read
+
 jobs:
   release:
     permissions:
@@ -18,8 +21,8 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: 22.x
       - name: install dependencies
@@ -27,7 +30,7 @@ jobs:
       - name: build project
         run: npm run build
       - name: Create Release Pull Request or Publish to npm
-        uses: changesets/action@v1
+        uses: changesets/action@3f3b26dd6c8ee73fea7b1d191ef54b10f30e1c49 # v1.4.8
         with:
           publish: npm run release
           version: npm run version

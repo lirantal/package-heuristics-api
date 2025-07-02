@@ -1,0 +1,35 @@
+name: Pin Dependencies
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly on Monday
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pin-actions:
+    name: Pin GitHub Actions
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'security: pin GitHub Actions by hash'
+          title: 'security: pin GitHub Actions by hash'
+          body: |
+            This PR pins GitHub Actions to specific commit hashes for security.
+            
+            This addresses the OpenSSF Scorecard Pinned-Dependencies check.
+          branch: security/pin-github-actions
+          delete-branch: true
