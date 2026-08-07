@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Markdown Lint
-        uses: ruzickap/action-my-markdown-linter@26b4129bf0352527e60b5bd739357af63df1b7bf
+        uses: ruzickap/action-my-markdown-linter@abb659d26eea70aee77a555bd057b9c45ddd3332
         with:
           debug: true
           config_file: .github/.markdownlint.yml
