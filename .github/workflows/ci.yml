@@ -36,3 +36,14 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
         env:
           CI: true
+
+  required-test:
+    name: test
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require successful validation
+        env:
+          VALIDATION_RESULT: ${{ needs.test.result }}
+        run: test "$VALIDATION_RESULT" = success
